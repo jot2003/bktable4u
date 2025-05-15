@@ -11,6 +11,18 @@ const CARD_WIDTH = width * 0.7;
 const CARD_HEIGHT = 180;
 const SPACING = 16;
 
+// Define GameItem interface
+interface GameItem {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  color: string[];
+  icon: string;
+  pointsReward: number;
+  duration: string;
+}
+
 // Mini games data
 const miniGames = [
   {
@@ -44,6 +56,15 @@ const miniGames = [
     duration: '3 phút'
   },
 ];
+
+// Define UtilityItem interface
+interface UtilityItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+}
 
 // Other utilities
 const utilities = [
@@ -96,7 +117,7 @@ export default function MoreScreen() {
   const [scrollX] = useState(new Animated.Value(0));
   
   // Render a mini-game item
-  const renderGameItem = ({ item }) => (
+  const renderGameItem = ({ item }: { item: GameItem }) => (
     <TouchableOpacity 
       style={styles.gameCard}
       onPress={() => console.log(`Launch game: ${item.name}`)}
@@ -122,7 +143,7 @@ export default function MoreScreen() {
   );
 
   // Render additional feature item
-  const renderFeatureItem = ({ item }) => (
+  const renderFeatureItem = ({ item }: { item: UtilityItem }) => (
     <TouchableOpacity 
       style={styles.featureItem}
       onPress={() => console.log(`Navigate to: ${item.title}`)}
@@ -139,7 +160,7 @@ export default function MoreScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { paddingTop: insets.top }]}>
       <ThemedView style={styles.header}>
         <ThemedText type="title">More</ThemedText>
       </ThemedView>
@@ -185,3 +206,145 @@ export default function MoreScreen() {
     </ThemedView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F8F8F8',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  header: {
+    padding: 16,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionHeader: {
+    paddingHorizontal: 16,
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    marginBottom: 4,
+  },
+  sectionSubtitle: {
+    fontSize: 14,
+    color: '#888',
+  },
+  gamesList: {
+    paddingLeft: 16,
+    paddingRight: 8,
+  },
+  gameCard: {
+    width: 200,
+    height: 220,
+    borderRadius: 16,
+    marginRight: 12,
+    overflow: 'hidden',
+    backgroundColor: '#FFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  gameImage: {
+    width: '100%',
+    height: 120,
+  },
+  gameOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.15)',
+    height: 120,
+  },
+  gameInfo: {
+    padding: 12,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  gameName: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  gameDescription: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 8,
+  },
+  gameFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pointsBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF9E6',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  pointsText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#FF8C00',
+    marginLeft: 4,
+  },
+  durationText: {
+    fontSize: 12,
+    color: '#888',
+  },
+  featuresContainer: {
+    backgroundColor: '#FFF',
+    borderRadius: 16,
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  featureItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  featureIconContainer: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  featureInfo: {
+    flex: 1,
+  },
+  featureTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 4,
+  },
+  featureDescription: {
+    fontSize: 13,
+    color: '#888',
+  },
+  appInfoContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  appVersionText: {
+    fontSize: 13,
+    color: '#888',
+    marginBottom: 4,
+  },
+  copyrightText: {
+    fontSize: 12,
+    color: '#AAA',
+  },
+});
