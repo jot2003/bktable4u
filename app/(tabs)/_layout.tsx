@@ -17,6 +17,15 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const insets = useSafeAreaInsets();
 
+  // Các tên icon được điều chỉnh để phù hợp với mapping
+  const tabIcons = {
+    home: "house.fill",
+    explore: "safari",
+    orders: "bag.fill",
+    profile: "person.fill",
+    more: "ellipsis"
+  };
+
   return (
     <Tabs
       screenOptions={{
@@ -46,35 +55,35 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Trang chủ',
-          tabBarIcon: ({ color }) => <TabBarIcon name="house" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name={tabIcons.home} color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Khám phá',
-          tabBarIcon: ({ color }) => <TabBarIcon name="safari" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name={tabIcons.explore} color={color} />,
         }}
       />
       <Tabs.Screen
         name="orders"
         options={{
           title: 'Đơn hàng',
-          tabBarIcon: ({ color }) => <TabBarIcon name="bag" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name={tabIcons.orders} color={color} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Cá nhân',
-          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name={tabIcons.profile} color={color} />,
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
           title: 'Thêm',
-          tabBarIcon: ({ color }) => <TabBarIcon name="ellipsis.circle" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name={tabIcons.more} color={color} />,
         }}
       />
     </Tabs>
